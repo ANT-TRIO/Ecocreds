@@ -61,10 +61,8 @@ export default function Navbar({ user }) {
             {user ? (
               <>
                 <div className="hidden sm:flex flex-col text-right">
-                  <span className="font-semibold">Hello, {user.name}</span>
-                  <span className="text-green-200 text-sm">
-                    {user.ecoCreds || 0} EcoCreds
-                  </span>
+                  <span className="font-semibold">{user.name}</span>
+                 
                 </div>
                 <button 
                   onClick={handleLogout} 
