@@ -1,42 +1,158 @@
-#root {
+/* ═══════════════════════════════════════════════════
+   EcoCred Global Design System
+   Import in src/index.css  →  @import './design-system.css';
+   ═══════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* palette */
+  --forest:     #1a3a2a;
+  --moss:       #2d5a3d;
+  --moss-light: #3d7a52;
+  --lime:       #b5e048;
+  --lime-dim:   #9acb38;
+  --lime-pale:  #e8f5d8;
+  --cream:      #f5f0e8;
+  --cream-dk:   #ede8de;
+  --cream-dkr:  #ddd8ce;
+  --stone:      #8a8a7a;
+  --stone-lt:   #b0b0a0;
+  --white:      #ffffff;
+  --red:        #e05252;
+  --red-pale:   #fdf0f0;
+  --amber:      #f5a623;
+  --amber-pale: #fff8e6;
+  --blue:       #3a7abf;
+  --blue-pale:  #eef4fc;
+
+  /* type */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* radius */
+  --r-sm:  .5rem;
+  --r:     .75rem;
+  --r-lg:  1rem;
+  --r-xl:  1.25rem;
+  --r-2xl: 1.5rem;
+  --r-full: 9999px;
+
+  /* shadow */
+  --shadow-sm:  0 1px 4px rgba(0,0,0,.06);
+  --shadow:     0 2px 12px rgba(26,58,42,.08);
+  --shadow-lg:  0 8px 32px rgba(26,58,42,.12);
+  --shadow-xl:  0 16px 48px rgba(26,58,42,.16);
+
+  /* transitions */
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--forest);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ── Utility classes ───────────────────────────── */
+.eco-page {
+  min-height: 100vh;
+  background: var(--cream);
+}
+
+.eco-shell {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 2rem 1.25rem 5rem;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* ── Cards ─────────────────────────────────────── */
+.eco-card {
+  background: var(--white);
+  border: 1.5px solid var(--cream-dk);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ── Buttons ───────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: .6rem 1.25rem; border-radius: var(--r-full);
+  font-family: var(--font-body); font-size: .875rem;
+  font-weight: 600; cursor: pointer; border: none;
+  transition: all .2s var(--ease); white-space: nowrap;
+  text-decoration: none;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.btn-forest  { background: var(--forest);  color: var(--lime); }
+.btn-forest:hover:not(:disabled)  { background: var(--moss); transform: translateY(-1px); box-shadow: var(--shadow); }
+
+.btn-lime    { background: var(--lime);    color: var(--forest); }
+.btn-lime:hover:not(:disabled)    { background: var(--lime-dim); transform: translateY(-1px); box-shadow: var(--shadow); }
+
+.btn-moss    { background: var(--moss);    color: var(--white); }
+.btn-moss:hover:not(:disabled)    { background: var(--moss-light); transform: translateY(-1px); }
+
+.btn-ghost   { background: transparent;   color: var(--stone); border: 1.5px solid var(--cream-dk); }
+.btn-ghost:hover:not(:disabled)   { background: var(--cream); color: var(--forest); }
+
+.btn-red     { background: var(--red);     color: var(--white); }
+.btn-red:hover:not(:disabled)     { background: #c94444; transform: translateY(-1px); }
+
+.btn-sm { padding: .4rem .9rem; font-size: .8rem; }
+.btn-lg { padding: .85rem 1.75rem; font-size: 1rem; }
+
+/* ── Spinner ───────────────────────────────────── */
+.spinner {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: spin .7s linear infinite; display: inline-block; flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Toast ─────────────────────────────────────── */
+.eco-toast {
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 9999;
+  background: var(--forest); color: var(--lime);
+  padding: .75rem 1.25rem; border-radius: var(--r-full);
+  font-size: .875rem; font-weight: 600;
+  display: flex; align-items: center; gap: .5rem;
+  box-shadow: var(--shadow-xl);
+  animation: toastIn .3s var(--ease) forwards;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.eco-toast.out { animation: toastOut .3s var(--ease) forwards; }
+@keyframes toastOut {
+  to { opacity: 0; transform: translateY(12px); }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* ── Page enter ────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+.anim-fadeup { animation: fadeUp .4s var(--ease) both; }
 
-.card {
-  padding: 2em;
+/* ── Badge ─────────────────────────────────────── */
+.eco-chip {
+  display: inline-flex; align-items: center; gap: .3rem;
+  font-size: .7rem; font-weight: 600; padding: .25rem .65rem;
+  border-radius: var(--r-full); text-transform: uppercase; letter-spacing: .05em;
 }
-
-.read-the-docs {
-  color: #888;
-}
+.eco-chip--green  { background: var(--lime-pale); color: var(--moss); }
+.eco-chip--amber  { background: var(--amber-pale); color: #7a5c00; }
+.eco-chip--red    { background: var(--red-pale); color: var(--red); }
+.eco-chip--blue   { background: var(--blue-pale); color: var(--blue); }

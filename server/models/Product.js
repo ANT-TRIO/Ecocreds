@@ -1,4 +1,3 @@
-// models/Product.js
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
@@ -6,10 +5,9 @@ const ProductSchema = new mongoose.Schema({
   description: String,
   category: String,
   price: Number,
-  carbonFootprint: Number, // kg CO2e
-  ageGroup: String,
-  gender: String,
-  alternative: { type: String, default: null }, // store id as string, consistent with your JSON _id
+  material: String,
+  packaging: String,
+  brand: String,
   image_url: { type: String, default: '' }
 });
 
