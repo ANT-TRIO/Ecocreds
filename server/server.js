@@ -16,12 +16,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-console.log("authRoutes:", authRoutes);
-console.log("productRoutes:", productRoutes);
-console.log("cartRoutes:", cartRoutes);
-console.log("paymentRoutes:", paymentRoutes);
-console.log("secondhandRoutes:", secondhandRoutes);
-console.log("ecoRoutes:", ecoRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', cartRoutes);

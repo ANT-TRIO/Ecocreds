@@ -21,6 +21,8 @@
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.20.0",
-    "razorpay": "^2.9.6"
+    "nodemon": "^3.1.14",
+    "razorpay": "^2.9.6",
+    "xlsx": "^0.18.5"
   }
 }

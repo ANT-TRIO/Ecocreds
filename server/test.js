@@ -3,7 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const app = express();
 
-const genAI = new GoogleGenerativeAI("AIzaSyCzatZsbfVPigxjLFlCBL5dnHYzaYzHciY");
+const genAI = new GoogleGenerativeAI("...");
 
 app.get("/test", async (req, res) => {
   try {
