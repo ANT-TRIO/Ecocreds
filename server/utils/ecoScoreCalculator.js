@@ -1,27 +1,31 @@
 /**
  * Calculate eco-score based on product attributes
+ * Scoring breakdown: sustainability 30pts, recycled 25pts, carbon 20pts, packaging 15pts, certs 10pts
  * @param {Object} product - Product object with eco attributes
  * @returns {number} Eco-score value from 0-100
  */
 function calculateEcoScore(product) {
+  // Input validation
   if (!product || typeof product !== 'object') return 0;
+  
+  const scoreBreakdown = {
+    isSustainable: 30,
+    hasRecycledContent: 25,
+    isBiodegradable: 15,
+    hasCertifications: 10
+  };
   
   let score = 0;
   
-  // Base score for sustainable materials
-  if (product.isSustainable) score += 30;
+  // Apply base criteria
+  Object.entries(scoreBreakdown).forEach(([criterion, points]) => {
+    if (product[criterion]) score += points;
+  });
   
-  // Points for recycled content
-  if (product.hasRecycledContent) score += 25;
-  
-  // Points for low carbon footprint
-  if (product.carbonFootprint < 5) score += 20;
-  
-  // Points for biodegradable packaging
-  if (product.isBiodegradable) score += 15;
-  
-  // Bonus points for certifications
-  if (product.hasCertifications) score += 10;
+  // Apply carbon footprint criteria with validation
+  if (product.carbonFootprint !== undefined && product.carbonFootprint < 5) {
+    score += 20;
+  }
   
   return Math.min(score, 100);
 }
