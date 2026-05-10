@@ -8,26 +8,26 @@ function calculateEcoScore(product) {
   // Input validation
   if (!product || typeof product !== 'object') return 0;
   
-  const scoreBreakdown = {
+  const ecoScoreCriteria = {
     isSustainable: 30,
     hasRecycledContent: 25,
     isBiodegradable: 15,
     hasCertifications: 10
   };
   
-  let score = 0;
+  let ecoScore = 0;
   
   // Apply base criteria
-  Object.entries(scoreBreakdown).forEach(([criterion, points]) => {
-    if (product[criterion]) score += points;
+  Object.entries(ecoScoreCriteria).forEach(([criterion, points]) => {
+    if (product[criterion]) ecoScore += points;
   });
   
   // Apply carbon footprint criteria with validation
   if (product.carbonFootprint !== undefined && product.carbonFootprint < 5) {
-    score += 20;
+    ecoScore += 20;
   }
   
-  return Math.min(score, 100);
+  return Math.min(ecoScore, 100);
 }
 
 module.exports = { calculateEcoScore };
