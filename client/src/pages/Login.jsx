@@ -134,7 +134,11 @@ export default function Login() {
   const submit = async e => {
     e.preventDefault(); setErr(""); setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", form);
+  //    const res = await axios.post("http://localhost:5000/api/auth/login", form);
+      const res = await axios.post(
+  "https://ecocreds-backend.onrender.com/api/auth/login",
+  form
+);
       setToken(res.data.token);
       window.location.href = "/dashboard";
     } catch (error) {
