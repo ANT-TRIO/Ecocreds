@@ -191,7 +191,11 @@ export default function Signup() {
   const submit = async e => {
     e.preventDefault(); setErr(""); setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/signup", form);
+  //    const res = await axios.post("http://localhost:5000/api/auth/signup", form);
+      const res = await axios.post(
+  "https://ecocreds-backend.onrender.com/api/auth/signup",
+  form
+);
       setToken(res.data.token);
       setStep(2);
       setTimeout(() => { window.location.href = "/dashboard"; }, 1200);
