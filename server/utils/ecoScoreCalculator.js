@@ -10,7 +10,7 @@ function calculateEcoScore(product) {
   
   let ecoScore = 0;
   
-  // Apply eco-criteria scoring
+  // Sustainability factors scoring
   if (product.isSustainable) ecoScore += 30;
   if (product.hasRecycledContent) ecoScore += 25;
   if (product.carbonFootprint !== undefined && product.carbonFootprint < 5) ecoScore += 20;
@@ -19,5 +19,8 @@ function calculateEcoScore(product) {
   
   return Math.min(ecoScore, 100);
 }
+
+module.exports = { calculateEcoScore };
+
 
 module.exports = { calculateEcoScore };
