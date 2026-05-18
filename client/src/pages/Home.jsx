@@ -1,4 +1,9 @@
+// import React, { useEffect, useState } from 'react';
+// import { formatCurrency } from '../utils/priceUtils';
+// 
 // export default function Home() {
+//   const [featuredProducts, setFeaturedProducts] = useState([]);
+//   
 //   const features = [
 //     {
 //       title: "Sustainable Buying",
