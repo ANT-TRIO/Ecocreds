@@ -3,6 +3,7 @@
 // import Navbar from '../components/Navbar';
 // import ProductsList from '../components/ProductsList';
 // import api from '../utils/api';
+// import { getCartItemCount } from '../utils/cartUtils';
 
 // export default function ProductsPage() {
 //   const [userData, setUserData] = useState(null);
