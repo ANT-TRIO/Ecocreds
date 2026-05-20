@@ -3,6 +3,8 @@
 // import Navbar from '../components/Navbar';
 // import api from '../utils/api';
 // import { Link } from 'react-router-dom';
+// import { formatPrice } from '../utils/priceUtils';
+// import { usePayment } from '../hooks/usePayment';
 
 // export default function SecondhandGoods() {
 //   const [products, setProducts] = useState([]);
