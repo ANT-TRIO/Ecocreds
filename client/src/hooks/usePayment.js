@@ -12,47 +12,29 @@ export const usePayment = () => {
       setIsProcessing(true);
       setError(null);
 
-      // Create order on backend
       const orderResponse = await api.post('/payments/create-order', {
-        amount: paymentDetails.amount,
-        cartItems: paymentDetails.cartItems
+        amount: paymentDetails.amount
       });
 
-      const orderId = orderResponse.data.orderId;
-
-      // Initialize Razorpay payment
-      const paymentResponse = await initializeRazorpayPayment({
+      const payment = await initializeRazorpayPayment({
         ...paymentDetails,
-        orderId
+        orderId: orderResponse.data.orderId
       });
 
-      // Verify payment on backend
       const verifyResponse = await api.post('/payments/verify', {
-        razorpay_order_id: paymentResponse.orderId,
-        razorpay_payment_id: paymentResponse.paymentId,
-        razorpay_signature: paymentResponse.signature
+        razorpay_order_id: payment.orderId,
+        razorpay_payment_id: payment.paymentId,
+        razorpay_signature: payment.signature
       });
 
-      return {
-        success: true,
-        data: verifyResponse.data
-      };
+      return { success: true, data: verifyResponse.data };
     } catch (err) {
-      const errorMessage = err.message || 'Payment processing failed';
-      setError(errorMessage);
-      return {
-        success: false,
-        error: errorMessage
-      };
+      setError(err.message);
+      return { success: false, error: err.message };
     } finally {
       setIsProcessing(false);
     }
   }, []);
 
-  return {
-    processPayment,
-    isProcessing,
-    error,
-    setError
-  };
+  return { processPayment, isProcessing, error };
 };

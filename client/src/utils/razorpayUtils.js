@@ -6,26 +6,23 @@
 const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID || 'rzp_test_default';
 
 /**
- * Initialize Razorpay payment
- * @param {Object} paymentDetails - Payment details
- * @returns {Promise} Payment response
+ * Simple payment initializer
  */
 export const initializeRazorpayPayment = async (paymentDetails) => {
-  const { amount, orderId, userEmail, userName, cartItems } = paymentDetails;
+  const { amount, orderId, userEmail, userName } = paymentDetails;
 
   return new Promise((resolve, reject) => {
     const options = {
       key: RAZORPAY_KEY_ID,
-      amount: amount * 100, // Convert to paise
+      amount: amount * 100,
       currency: 'INR',
       order_id: orderId,
-      handler: async (response) => {
+      handler: (response) => {
         resolve({
           success: true,
           paymentId: response.razorpay_payment_id,
           orderId: response.razorpay_order_id,
-          signature: response.razorpay_signature,
-          cartItems
+          signature: response.razorpay_signature
         });
       },
       prefill: {
@@ -36,9 +33,7 @@ export const initializeRazorpayPayment = async (paymentDetails) => {
         color: '#22c55e'
       },
       modal: {
-        ondismiss: () => {
-          reject(new Error('Payment cancelled by user'));
-        }
+        ondismiss: () => reject(new Error('Payment cancelled'))
       }
     };
 
@@ -48,20 +43,9 @@ export const initializeRazorpayPayment = async (paymentDetails) => {
 };
 
 /**
- * Verify payment signature
- * @param {Object} payment - Payment object with signature
- * @returns {boolean} Is signature valid
- */
-export const verifyPaymentSignature = (payment) => {
-  const { paymentId, orderId, signature } = payment;
-  return paymentId && orderId && signature;
-};
-
-/**
  * Format payment amount for display
- * @param {number} amount - Amount in INR
- * @returns {string} Formatted amount
  */
 export const formatPaymentAmount = (amount) => {
   return `₹${amount.toFixed(2)}`;
 };
+
