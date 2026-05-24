@@ -1,7 +1,14 @@
 // src/utils/cartUtils.js
-import { formatPrice } from './priceUtils';
+/**
+ * Cart management utilities
+ */
 
 export const addToCart = (product, quantity = 1) => {
+  if (!product || !product.id) {
+    console.error('Invalid product:', product);
+    return null;
+  }
+
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
   const existingItem = cart.find(item => item.id === product.id);
 
@@ -20,6 +27,8 @@ export const addToCart = (product, quantity = 1) => {
 };
 
 export const removeFromCart = (productId) => {
+  if (!productId) return null;
+
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
   const updatedCart = cart.filter(item => item.id !== productId);
   localStorage.setItem('cart', JSON.stringify(updatedCart));
@@ -27,6 +36,8 @@ export const removeFromCart = (productId) => {
 };
 
 export const updateCartQuantity = (productId, quantity) => {
+  if (!productId) return null;
+
   const cart = JSON.parse(localStorage.getItem('cart') || '[]');
   const item = cart.find(item => item.id === productId);
 
@@ -34,7 +45,7 @@ export const updateCartQuantity = (productId, quantity) => {
     if (quantity <= 0) {
       return removeFromCart(productId);
     }
-    item.qty = quantity;
+    item.qty = Math.max(1, quantity);
   }
 
   localStorage.setItem('cart', JSON.stringify(cart));
